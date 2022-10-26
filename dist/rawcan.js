@@ -1,25 +1,37 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
-var events_1 = require('events');
-var can_wrap_1 = require('./can_wrap');
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ERR_MASK = exports.EFF_MASK = exports.SFF_MASK = exports.ERR_FLAG = exports.RTR_FLAG = exports.EFF_FLAG = exports.createSocket = exports.Socket = void 0;
+var events_1 = require("events");
+var can_wrap_1 = require("./can_wrap");
 var Socket = (function (_super) {
     __extends(Socket, _super);
     function Socket(iface) {
-        var _this = this;
-        _super.call(this);
-        this._handle = new can_wrap_1.CANWrap();
-        this._handle.onSent(function (err) { _this._onSent(err); });
-        this._handle.onMessage(function (id, buffer) { _this.emit('message', id, buffer); });
-        this._handle.onError(function (err) { _this.emit('error', err); });
-        this._sendQueue = [];
-        this._bound = false;
+        var _this = _super.call(this) || this;
+        _this._handle = new can_wrap_1.CANWrap();
+        _this._handle.onSent(function (err) { _this._onSent(err); });
+        _this._handle.onMessage(function (id, buffer) { _this.emit('message', id, buffer); });
+        _this._handle.onError(function (err) { _this.emit('error', err); });
+        _this._sendQueue = [];
+        _this._bound = false;
         if (iface) {
-            this.bind(iface);
+            _this.bind(iface);
         }
+        return _this;
     }
     Socket.prototype.bind = function (iface) {
         if (this._bound) {
@@ -55,14 +67,6 @@ var Socket = (function (_super) {
         this._handle.close();
         this._handle = undefined;
         this.emit('close');
-    };
-    Socket.prototype.ref = function () {
-        this._healthCheck();
-        this._handle.ref();
-    };
-    Socket.prototype.unref = function () {
-        this._healthCheck();
-        this._handle.unref();
     };
     Socket.prototype._onSent = function (err) {
         var sent = this._sendQueue[0];

@@ -8,8 +8,6 @@ export declare class Socket extends EventEmitter {
     send(id: number, buffer: string | Buffer | number[], callback?: (err: number) => void): void;
     setFilter(filter: number, mask: number): void;
     close(): void;
-    ref(): void;
-    unref(): void;
     _onSent(err: number): void;
     _healthCheck(): void;
 }

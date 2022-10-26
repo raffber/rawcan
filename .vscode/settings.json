@@ -1,0 +1,17 @@
+{
+    "editor.formatOnSave": true,
+    "files.autoSave": "onFocusChange",
+    "clangd.arguments": [
+        "-background-index",
+        "--completion-style=detailed",
+        "-compile-commands-dir=build",
+        "-cross-file-rename",
+        "-header-insertion=never",
+    ],
+    "[c]": {
+        "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+    },
+    "[cpp]": {
+        "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+    },
+}

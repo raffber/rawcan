@@ -14,7 +14,6 @@
 #include <cstdint>
 #include <cstdlib>
 
-using Nan::Callback;
 using v8::Local;
 using v8::Function;
 using v8::FunctionTemplate;

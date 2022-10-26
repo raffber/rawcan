@@ -2,3 +2,4 @@
 /node_modules/
 npm-debug.log
 .ycm_extra_conf.pyc
+.cache

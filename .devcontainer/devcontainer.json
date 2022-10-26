@@ -1,0 +1,19 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.209.5/containers/javascript-node-postgres
+// Update the VARIANT arg in docker-compose.yml to pick a Node.js version
+{
+    "name": "rawcan",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    // Add the IDs of extensions you want installed when the container is created.
+    "extensions": [
+        "ms-azuretools.vscode-docker",
+        "dbaeumer.vscode-eslint",
+        "mhutchie.git-graph",
+        "pascalsenn.keyboard-quickfix",
+        "hediet.vscode-drawio",
+        "llvm-vs-code-extensions.vscode-clangd"
+    ],
+    "remoteUser": "node"
+}

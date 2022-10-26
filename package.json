@@ -12,12 +12,12 @@
     "definition": "dist/rawcan.d.ts"
   },
   "scripts": {
-    "configure": "node-gyp configure",
-    "build:gyp": "node-gyp build",
+    "configure": "cmake-js configure",
+    "compile": "cmake-js compile",
     "build:jssrc": "tsc -p src",
     "build:jstest": "tsc -p test",
     "build:js": "npm run build:jssrc && npm run build:jstest",
-    "build": "npm run build:gyp && npm run build:js",
+    "build": "npm run compile && npm run build:js",
     "preversion": "npm test",
     "watch": "npm run build:jssrc -- --watch & npm run build:jstest -- --watch",
     "test": "NODE_ENV=test mocha build/rawcan_test.js"
@@ -38,14 +38,13 @@
     "linux"
   ],
   "dependencies": {
-    "bindings": "^1.2.1",
-    "nan": "^2.2.1"
+    "bindings": "^1.5.0",
+    "nan": "^2.17.0"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
+    "chai": "^4.3.6",
     "cmake-js": "^7.0.0",
-    "mocha": "^2.4.5",
-    "typescript": "^1.8.9",
-    "typings": "^0.7.12"
+    "mocha": "^10.1.0",
+    "typescript": "^4.8.4"
   }
 }
