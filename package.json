@@ -20,7 +20,8 @@
     "build": "npm run compile && npm run build:js",
     "preversion": "npm test",
     "watch": "npm run build:jssrc -- --watch & npm run build:jstest -- --watch",
-    "test": "NODE_ENV=test mocha build/rawcan_test.js"
+    "test": "NODE_ENV=test mocha build/rawcan_test.js",
+    "install": "cmake-js compile"
   },
   "repository": {
     "type": "git",
