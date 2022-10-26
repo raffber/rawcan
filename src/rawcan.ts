@@ -73,16 +73,6 @@ export class Socket extends EventEmitter {
     this.emit('close');
   }
 
-  ref(): void {
-    this._healthCheck();
-    this._handle.ref();
-  }
-
-  unref(): void {
-    this._healthCheck();
-    this._handle.unref();
-  }
-
   _onSent(err: number): void {
     const sent = this._sendQueue[0];
     if (sent.callback) {
