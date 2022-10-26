@@ -74,8 +74,8 @@ NAN_METHOD(CANWrap::Bind)
 
     assert(self);
     assert(!self->m_closed);
-
-    Nan::Utf8String iface(info[0]->ToString());
+    
+    Nan::Utf8String iface(info[0]);
 
     auto ifr = ifreq();
     strcpy(ifr.ifr_name, *iface);
@@ -223,7 +223,7 @@ void CANWrap::pollCallback(int status, int events)
             {
                 Nan::HandleScope scope;
                 Local<Value> argv[1] = {Nan::New(err)};
-                m_sentCallback.Call(1, argv);
+                Nan::Call(m_sentCallback, 1, argv);
             }
             else
             {
@@ -245,7 +245,7 @@ void CANWrap::pollCallback(int status, int events)
                     Nan::CopyBuffer(reinterpret_cast<char*>(&m_recvBuffer.data),
                                     m_recvBuffer.can_dlc)
                         .ToLocalChecked()};
-                m_messageCallback.Call(2, argv);
+                Nan::Call(m_messageCallback, 2, argv);
             }
         }
     }
@@ -303,7 +303,7 @@ void CANWrap::callErrorCallback(int err)
     {
         Nan::HandleScope scope;
         Local<Value> argv[1] = {Nan::New(err)};
-        m_errorCallback.Call(1, argv);
+        Nan::Call(m_errorCallback, 1, argv);
     }
 }
 }
